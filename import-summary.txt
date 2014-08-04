@@ -1,0 +1,67 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* Einrichtung.pdf
+* LICENSE
+* README.md
+* de.wikilab.dicticc.apk
+* export/
+* export/2011-08-31/
+* export/2011-08-31/de.wikilab.dicticc.apk
+* export/2011-09-29/
+* export/2011-09-29/de.wikilab.dicticc.apk
+* export/2011-10-03/
+* export/2011-10-03/de.wikilab.dicticc.apk
+* export/2011-10-16/
+* export/2011-10-16/de.wikilab.dicticc.apk
+* export/2011-10-27/
+* export/2011-10-27/de.wikilab.dicticc.apk
+* export/2011-12-20/
+* export/2011-12-20/de.wikilab.dicticc.apk
+* export/2012-01-08/
+* export/2012-01-08/de.wikilab.dicticc.apk
+* export/2012-01-12/
+* export/2012-01-12/de.wikilab.dicticc.apk
+* export/2012-01-22/
+* export/2012-01-22/de.wikilab.dicticc.apk
+* icon_all_sizes/
+* icon_all_sizes/128x128.png
+* icon_all_sizes/16x16.png
+* icon_all_sizes/22x22.png
+* icon_all_sizes/24x24.png
+* icon_all_sizes/32x32.png
+* icon_all_sizes/48x48.png
+* icon_all_sizes/72x72.png
+* icon_all_sizes/favicon.png
+* proguard.cfg
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
