@@ -49,8 +49,10 @@ public class Dict {
 	public static final int DEF_GENDER = 5;
 	public static final int DEF_EXTRA = 6;
 	public static final int TYPE = 7;
-	
-	public static final String dictFolder = "Android/data/org.profeda.dictionary/imported";
+
+    private static final String TAG = "Dictionary";
+
+    public static final String dictFolder = "Android/data/org.profeda.dictionary/imported";
 	//public static final String dictFolder = "dictionaries/imported";
 	
 	
@@ -65,7 +67,7 @@ public class Dict {
 	
     public Dict(Context ctx, String pFilePrefix) {
     	try {
-    		filePrefix = pFilePrefix;
+            filePrefix = pFilePrefix;
     		BufferedReader bfr = new BufferedReader(new InputStreamReader(openForRead(ctx, filePrefix+"_info")));
     		title = bfr.readLine().trim();
     		String secondLine = bfr.readLine().trim();

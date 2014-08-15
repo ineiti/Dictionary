@@ -1,13 +1,12 @@
 apply plugin: 'android'
-
 android {
     compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "org.profeda.dictionary"
-        minSdkVersion 9
-        targetSdkVersion 9
+        minSdkVersion 8
+        targetSdkVersion 8
     }
 
     buildTypes {
@@ -16,4 +15,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
 }
