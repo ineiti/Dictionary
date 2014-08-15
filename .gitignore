@@ -1,0 +1,5 @@
+build
+.gradle
+.idea
+.navigation
+app/src/main/assets/dict*
