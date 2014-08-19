@@ -169,7 +169,7 @@ public class DictionaryImportActivity extends ListActivity {
                 "Initializing");
 
         Log.i(TAG, "going to call DictionaryImporter for fileSpec=" + fileSpec);
-        DictionaryImporter imp = new DictionaryImporter(this, progdialog);
+        DictionaryImporter imp = new DictionaryImporter(this, progdialog, null);
         imp.execute(fileSpec);
     }
 }

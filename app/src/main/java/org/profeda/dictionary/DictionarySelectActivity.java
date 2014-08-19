@@ -38,6 +38,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,22 +77,27 @@ public class DictionarySelectActivity extends ListActivity {
         
     	File[] subfiles = new File(Dict.getPath(DictionarySelectActivity.this)).listFiles();
     	itemlist = new ArrayList<Dictfileitem>();
-        for(int i = 0; i < subfiles.length; i++) {
-        	String name = subfiles[i].getName();
-        	if (name.endsWith("_info")) {
-        		Dictfileitem item = new Dictfileitem();
-        		item.file_prefix = name.substring(0, name.length()-5);
-        		
-        		if (item.file_prefix.equals(currentDictFile)) item.selected = true;
-        		
-        		try {
-	        		BufferedReader bfr = new BufferedReader(new InputStreamReader(Dict.openForRead(DictionarySelectActivity.this, name)));
-	        		item.title = bfr.readLine();
-	        		bfr.close();
-        		} catch (Exception ex) {}
-        		if (item.title == null) item.title = name;
-        		itemlist.add(item);
-        	}
+        try {
+            for (int i = 0; i < subfiles.length; i++) {
+                String name = subfiles[i].getName();
+                if (name.endsWith("_info")) {
+                    Dictfileitem item = new Dictfileitem();
+                    item.file_prefix = name.substring(0, name.length() - 5);
+
+                    if (item.file_prefix.equals(currentDictFile)) item.selected = true;
+
+                    try {
+                        BufferedReader bfr = new BufferedReader(new InputStreamReader(Dict.openForRead(DictionarySelectActivity.this, name)));
+                        item.title = bfr.readLine();
+                        bfr.close();
+                    } catch (Exception ex) {
+                    }
+                    if (item.title == null) item.title = name;
+                    itemlist.add(item);
+                }
+            }
+        } catch ( NullPointerException e ){
+            Log.v("DictSelect", "Didn't find path yet");
         }
         
         
@@ -314,9 +320,15 @@ public class DictionarySelectActivity extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-        case R.id.import_dictionary:
-            importDictionary();
-            return true;
+            case R.id.import_dictionary:
+                importDictionary();
+                return true;
+            case R.id.reset_default:
+                final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor pedit = pref.edit();
+                pedit.putInt("import_dict_date", 0);
+                pedit.commit();
+                return true;
         case R.id.download_dictionaries:
         	startActivity(new Intent(DictionarySelectActivity.this, DownloadFrameActivity.class));
         	return true;

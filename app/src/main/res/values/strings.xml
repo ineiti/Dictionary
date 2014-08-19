@@ -19,6 +19,7 @@
     <string name="copy_translation_to_clipboard">Copy to clipboard</string>
     <string name="importing_dictionary_long">Importing dictionary, please wait...\n</string>
     <string name="download_dictionaries">Download dictionaries...</string>
+    <string name="import_reset_default">Reset default dictionaries</string>
     <string name="no_dictionary_selected_helptext">&lt;p&gt;&lt;b&gt;No dictionary selected.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Touch the button "Dictionary" at the top right. There you can select a dictionary if you have already imported one.&lt;/p&gt;&lt;p&gt;Otherwise you can download and import dictionaries there.&lt;/p&gt;</string>
     <string name="no_dictionaries_helptext">&lt;p&gt;&lt;b&gt;&lt;font color="#ffff66"&gt;You haven\'t imported any dictionaries.&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Push the menu button, to import a dictionary from SD card and to learn how to download dictionaries from the internet.&lt;/p&gt;</string>
     <string name="enter_term_helptext">&lt;p&gt;&lt;b&gt;Please enter a search term.&lt;/b&gt;&lt;/p&gt;Last terms:</string>

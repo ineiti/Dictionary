@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -593,20 +594,31 @@ public class SearchActivity extends Activity {
                 Log.i(TAG, "Adding dictionary " + dict + " to list.");
                 dictionaries.add(dict);
             }
-            if (pref.getInt("import_dict_date", 0) <= version) {
-                String dictFolder = "Android/data/org.profeda.dictionary/imported";
-                switch (pref.getString("location_path", "sdcard").charAt(0)) {
-                    case 's':
-                        Log.i(TAG, "Deleting all files in " + dictFolder);
-                        FileUtils.cleanDirectory(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), dictFolder));
-                    default:
-                        Log.i(TAG, "Don't know what to do with internal storage");
+
+            if (pref.getInt("import_dict_date", 0) < version) {
+                try {
+                    String dictFolder = "Android/data/org.profeda.dictionary/imported";
+                    File d = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), dictFolder);
+                    switch (pref.getString("location_path", "sdcard").charAt(0)) {
+                        case 's':
+                            Log.i(TAG, "Deleting all files in " + dictFolder);
+                            if ( d.exists() ) {
+                                FileUtils.cleanDirectory(d);
+                            }
+                        default:
+                            Log.i(TAG, "Don't know what to do with internal storage");
+                    }
+                    d.mkdirs();
+                } catch ( IOException e ){
+                    Log.i( TAG, "Directory is not yet here " );
                 }
+                DictionaryImporter imp = null;
                 for (String fileSpec : dictionaries) {
                     Log.i(TAG, "going to call DictionaryImporter for fileSpec=" + fileSpec);
-                    DictionaryImporter imp = new DictionaryImporter(this,
+                    imp = new DictionaryImporter(this,
                             ProgressDialog.show(this, null, getString(R.string.importing_dictionary_long) +
-                                    "Initializing"));
+                                    "Initializing"),
+                            imp );
                     imp.execute(fileSpec);
                 }
                 Editor pedit = pref.edit();

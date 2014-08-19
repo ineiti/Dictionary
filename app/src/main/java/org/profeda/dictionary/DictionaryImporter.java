@@ -26,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.concurrent.ExecutionException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -40,10 +41,12 @@ public class DictionaryImporter extends AsyncTask<String, Long, Long[]> {
     String errMes = null, errDetails = "";
     Context callerContext;
     ProgressDialog progdialog;
+    AsyncTask otherimport;
 
-    public DictionaryImporter(Context c, ProgressDialog p){
+    public DictionaryImporter(Context c, ProgressDialog p, AsyncTask d){
         callerContext = c;
         progdialog = p;
+        otherimport = d;
     }
 
     @Override
@@ -54,6 +57,16 @@ public class DictionaryImporter extends AsyncTask<String, Long, Long[]> {
 
         long c = 0, ok = 0;
         BufferedWriter writeInfo = null, writeCurrent = null;
+
+        if ( otherimport != null ){
+            try {
+                otherimport.get();
+            } catch ( InterruptedException e ){
+                Log.i( TAG, "Couldn't wait for other task" );
+            } catch ( ExecutionException e ){
+                Log.i( TAG, "Couldn't wait for other task" );
+            }
+        }
 
         try {
             BufferedReader read;
